@@ -48,6 +48,8 @@ group :development, :test do
 
   # Rails best practices
   gem 'rails_best_practices'
+
+  gem "faker"
 end
 
 group :development do
