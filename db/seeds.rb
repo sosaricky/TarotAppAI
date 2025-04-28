@@ -7,3 +7,8 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require 'faker'
+require_relative 'seeds/cards_seed.rb'
+require_relative 'seeds/users_seed.rb'
+require_relative 'seeds/reading_cards_seed.rb'
+require_relative 'seeds/readings_seed.rb'
