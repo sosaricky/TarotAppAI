@@ -28,4 +28,27 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  tarot:
+    cartas:
+      el_loco: "The Fool"
+      el_mago: "The Magician"
+      la_emperatriz: "The Empress"
+      la_fuerza: "Strength"
+      la_muerte: "Death"
+      el_diablo: "The Devil"
+      la_luna: "The Moon"
+      el_sol: "The Sun"
+      la_torre: "The Tower"
+      el_juicio: "Judgement"
+      el_ermitaño: "The Hermit"
+      la_rueda_de_la_fortuna: "Wheel of Fortune"
+      la_sacerdotisa: "The High Priestess"
+      el_carro: "The Chariot"
+      la_estrella: "The Star"
+      la_justicia: "Justice"
+      el_colgado: "The Hanged Man"
+      la_templanza: "Temperance"
+      el_emperador: "The Emperor"
+      el_papa: "The Pope"
+      el_mundo: "The World"
+      los_enamorados: "The Lovers"
