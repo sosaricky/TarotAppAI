@@ -161,15 +161,14 @@ images_path = 'public/images/cards/'
 card_image_paths = {}
 card_names.each do
   |card_name|
-  puts card_name.gsub(' ','_').downcase
-  card_image_paths[card_name] = images_path + I18n.t("tarot.cartas.#{card_name.gsub(' ','_').downcase}") + '.jpg'
-
+  puts card_name.gsub(' ', '_').downcase
+  card_image_paths[card_name] = images_path + I18n.t("tarot.cartas.#{card_name.gsub(' ', '_').downcase}") + '.jpg'
 end
 
 cards = []
 card_names.each do
   |card_name|
-  cards << {name:card_name, image_path: card_image_paths[card_name], message: messages_by_card[card_name].sample}
+  cards << { name: card_name, image_path: card_image_paths[card_name], message: messages_by_card[card_name].sample }
 end
 
 
