@@ -46,7 +46,7 @@ end
 # Mismo que para el caso de los messages y la conclusion
 
 # Ojo que las cartas no se pueden repetir en una tirada.
-# 
+#
 3.times do
   reading_id = Reading.all.sample.id
   (0..2).each do
