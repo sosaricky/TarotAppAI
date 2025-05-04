@@ -47,9 +47,13 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   # Rails best practices
-  gem 'rails_best_practices'
+  gem "rails_best_practices"
 
   gem "faker"
+
+  gem "solargraph"
+
+  gem "ruby-lsp"
 end
 
 group :development do
@@ -57,5 +61,5 @@ group :development do
   gem "web-console"
 
   # Highlight the fine-grained location where an error occurred [https://github.com/ruby/error_highlight]
-  gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+  gem "error_highlight", ">= 0.4.0", platforms: [ :ruby ]
 end
