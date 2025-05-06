@@ -54,6 +54,10 @@ group :development, :test do
   gem "solargraph"
 
   gem "ruby-lsp"
+
+  gem "httparty"
+
+  gem "dotenv-rails"
 end
 
 group :development do
