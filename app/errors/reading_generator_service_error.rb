@@ -1,0 +1,2 @@
+class ReadingGeneratorServiceError <  StandardError
+end
