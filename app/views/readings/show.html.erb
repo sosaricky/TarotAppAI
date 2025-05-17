@@ -1,0 +1,8 @@
+<h1>Readings</h1>
+<h3><%= @reading.name %></h3>
+<ul>
+    <% @reading.cards.each do |card|%>
+    <li><%= "#{card.name} : #{card.message}" %></li>
+    <% end %>
+</ul>
+<p><%= @reading.conclusion %></p>
