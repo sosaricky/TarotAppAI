@@ -4,7 +4,8 @@ class ReadingsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create ]
 
   def index
-    @reading = Reading.find_by(id: params[:reading_id]) if params[:reading_id].present?
+    id = params[:reading_id]
+    @reading = Reading.find_by(id: id) if id.present?
   end
 
   def show
@@ -13,9 +14,7 @@ class ReadingsController < ApplicationController
 
   def create
     adapter = Adapters::DeepSeekAdapter.new
-    reading = ReadingGeneratorService.new(current_user.id, adapter).call
-    redirect_to readings_path(reading_id: reading.id)
+    new_reading = ReadingGeneratorService.new(current_user.id, adapter).call
+    redirect_to readings_path(reading_id: new_reading.id)
   end
-
-  def destroy;end
 end
