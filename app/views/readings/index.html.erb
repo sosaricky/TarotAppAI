@@ -139,11 +139,13 @@
 
     <!-- Conclusión y Botón -->
     <div class="text-center mt-4 mt-md-5">
+      <% if @reading %>
       <div class="card conclusion-card p-4 mb-4">
         <h4>Conclusión</h4>
         
         <p><%= @reading ? @reading.conclusion : " " %></p>
       </div>
+      <% end  %>
       <%= button_to 'Nueva lectura', readings_path, method: :post, class: 'btn btn-purple btn-lg mt-2' %>
     </div>
   </div>
