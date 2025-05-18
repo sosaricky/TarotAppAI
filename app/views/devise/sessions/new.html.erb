@@ -1,0 +1,125 @@
+<style>
+  /* Reset del fondo */
+  html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #121017 !important;
+    background-image: url('https://www.transparenttextures.com/patterns/black-paper.png') !important;
+    font-family: 'Cormorant SC', serif;
+  }
+
+  /* Contenedor principal */
+  .login-tarot {
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(30, 25, 45, 0.9);
+    border: 2px solid #FFD700;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(106, 13, 173, 0.5);
+    color: #f8f1e5;
+  }
+
+  /* Título */
+  .login-tarot h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: #FFD700;
+    text-align: center;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Campos de formulario */
+  .login-tarot .field {
+    margin-bottom: 20px;
+  }
+
+  .login-tarot label {
+    display: block;
+    margin-bottom: 8px;
+    font-family: 'MedievalSharp', cursive;
+  }
+
+  .login-tarot input[type="email"],
+  .login-tarot input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #6a0dad;
+    border-radius: 8px;
+    color: #f8f1e5;
+    font-family: 'Cormorant SC', serif;
+  }
+
+  /* Botón */
+  .login-tarot .actions input[type="submit"] {
+    background: linear-gradient(135deg, #6a0dad, #8a2be2);
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+  }
+
+  .login-tarot .actions input[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(106, 13, 173, 0.4);
+  }
+
+  /* Links */
+  .login-tarot .links {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .login-tarot .links a {
+    color: #FFD700;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 0.9rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 576px) {
+    .login-tarot {
+      margin: 20px;
+      padding: 20px;
+    }
+  }
+</style>
+
+<!-- HTML del formulario -->
+<div class="login-tarot">
+  <h2>🔮 Iniciar Sesión</h2>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "current-password" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Ingresar" %>
+    </div>
+  <% end %>
+
+  <div class="links">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
