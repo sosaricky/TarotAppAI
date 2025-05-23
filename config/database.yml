@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: tarot_app_ai_production
-  username: tarot_app_ai
-  password: <%= ENV["TAROT_APP_AI_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
