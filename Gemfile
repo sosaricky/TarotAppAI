@@ -19,6 +19,8 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 gem "sassc-rails"
+gem "httparty"
+
 gem "bootstrap", "~> 5.3"
 
 # Use Redis adapter to run Action Cable in production
@@ -57,8 +59,6 @@ group :development, :test do
   gem "solargraph"
 
   gem "ruby-lsp"
-
-  gem "httparty"
 
   gem "dotenv-rails"
 end
