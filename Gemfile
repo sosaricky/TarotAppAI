@@ -20,7 +20,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 gem "sassc-rails"
 gem "httparty"
-
+gem "importmap-rails"
 gem "bootstrap", "~> 5.3"
 
 # Use Redis adapter to run Action Cable in production
@@ -63,8 +63,6 @@ group :development, :test do
   gem "dotenv-rails"
 
   gem "htmlbeautifier"
-
-  gem "importmap-rails"
 end
 
 group :development do
