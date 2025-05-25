@@ -63,6 +63,8 @@ group :development, :test do
   gem "dotenv-rails"
 
   gem "htmlbeautifier"
+
+  gem "importmap-rails"
 end
 
 group :development do
