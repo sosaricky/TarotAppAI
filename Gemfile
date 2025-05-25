@@ -61,6 +61,8 @@ group :development, :test do
   gem "ruby-lsp"
 
   gem "dotenv-rails"
+
+  gem "htmlbeautifier"
 end
 
 group :development do

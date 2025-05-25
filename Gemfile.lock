@@ -116,6 +116,7 @@ GEM
     ffi (1.17.2-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    htmlbeautifier (1.4.3)
     httparty (0.23.1)
       csv
       mini_mime (>= 1.0.0)
@@ -364,6 +365,7 @@ DEPENDENCIES
   dotenv-rails
   error_highlight (>= 0.4.0)
   faker
+  htmlbeautifier
   httparty
   importmap-rails
   jbuilder
