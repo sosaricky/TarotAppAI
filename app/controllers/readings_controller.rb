@@ -4,12 +4,11 @@ class ReadingsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create ]
 
   def index
-    id = params[:reading_id]
-    @reading = Reading.find_by(id: id) if id.present?
+    @readings = current_user.readings.all
   end
 
   def show
-    @reading = Reading.find(params[:id])
+    @reading = current_user.readings.find(params[:id])
   end
 
   def create
