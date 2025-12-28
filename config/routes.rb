@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "readings#index"
+  root "dashboard#show"
   resources :readings, only: [ :index, :show, :create ]
   devise_for :users
 
@@ -17,4 +17,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   get "*unmatched_route", to: redirect("/")
+
+  # Dashboard controller route
+  get "/dashboard", to: "dashboard#show"
 end
