@@ -1,0 +1,34 @@
+<section class="dashboard">
+  <header class="dashboard-header">
+  </header>
+
+  <div class="dashboard-actions">
+    <article class="action">
+      <h2 class="action-title">Nueva lectura</h2>
+      <p class="action-description">
+        Generá una nueva tirada de tarot.
+      </p>
+      <%= button_to "Crear", readings_path, method: :post, class: "action-button" %>
+    </article>
+
+    <article class="action">
+      <h2 class="action-title">Última lectura</h2>
+      <p class="action-description">
+        Ver tu lectura más reciente.
+      </p>
+      <% if @last_reading %>
+        <%= link_to "Ver", reading_path(@last_reading), class: "action-button" %>
+      <% else %>
+        <span class="action-disabled">Todavía no tenés lecturas</span>
+      <% end %>
+    </article>
+
+    <article class="action">
+      <h2 class="action-title">Mis lecturas</h2>
+      <p class="action-description">
+        Accedé a tu historial completo.
+      </p>
+      <%= link_to "Ver todas", readings_path, class: "action-button" %>
+    </article>
+  </div>
+</section>
