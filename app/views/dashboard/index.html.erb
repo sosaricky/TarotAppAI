@@ -1,7 +1,6 @@
 <section class="dashboard">
   <header class="dashboard-header">
   </header>
-
   <div class="dashboard-actions">
     <article class="action">
       <h2 class="action-title">Nueva lectura</h2>
@@ -10,7 +9,6 @@
       </p>
       <%= button_to "Crear", readings_path, method: :post, class: "action-button" %>
     </article>
-
     <article class="action">
       <h2 class="action-title">Última lectura</h2>
       <p class="action-description">
@@ -22,13 +20,16 @@
         <span class="action-disabled">Todavía no tenés lecturas</span>
       <% end %>
     </article>
-
     <article class="action">
       <h2 class="action-title">Mis lecturas</h2>
       <p class="action-description">
         Accedé a tu historial completo.
       </p>
-      <%= link_to "Ver todas", readings_path, class: "action-button" %>
+      <% unless @has_readings %>
+        <span class="action-disabled">Todavía no tenés lecturas</span>
+      <% else%>
+        <%= link_to "Ver todas", readings_path, class: "action-button" %>
+      <%end%>
     </article>
   </div>
 </section>
