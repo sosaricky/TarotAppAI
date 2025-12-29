@@ -162,48 +162,114 @@
       }
 
       /* Home */
-.home {
-  text-align: center;
-}
+      .home {
+        text-align: center;
+      }
 
-.home-title {
-  font-size: 2.4rem;
-  margin-bottom: var(--space-xl);
-}
+      .home-title {
+        font-size: 2.4rem;
+        margin-bottom: var(--space-xl);
+      }
 
-.home-actions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  max-width: 360px;
-  margin: 0 auto;
-}
+      .home-actions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+        max-width: 360px;
+        margin: 0 auto;
+      }
 
-.home-card {
-  display: block;
-  padding: var(--space-md);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-muted);
-  border-radius: var(--radius-md);
-  color: var(--color-text);
-  font-family: var(--font-title);
-  font-size: 1.2rem;
-}
+      .home-card {
+        display: block;
+        padding: var(--space-md);
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-muted);
+        border-radius: var(--radius-md);
+        color: var(--color-text);
+        font-family: var(--font-title);
+        font-size: 1.2rem;
+      }
 
-.home-card:hover {
-  border-color: var(--color-accent);
-}
+      .home-card:hover {
+        border-color: var(--color-accent);
+      }
 
+      /* Login signup  */
+      /* Auth layout */
+      .auth {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: var(--space-xl);
+      }
+
+      .auth-card {
+        background-color: var(--color-surface);
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+        width: 100%;
+        max-width: 420px;
+      }
+
+      .auth-title {
+        text-align: center;
+        margin-bottom: var(--space-lg);
+      }
+
+      .auth-field {
+        margin-bottom: var(--space-md);
+      }
+
+      .auth-field label {
+        display: block;
+        margin-bottom: var(--space-xs);
+        color: var(--color-muted);
+      }
+
+      .auth-field input {
+        width: 100%;
+        padding: 8px;
+        border-radius: var(--radius-sm);
+        border: none;
+      }
+
+      .auth-checkbox {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        font-size: 0.9rem;
+        color: var(--color-muted);
+      }
+
+      .auth-actions {
+        margin-top: var(--space-md);
+      }
+
+      .auth-button {
+        width: 100%;
+        padding: 10px;
+        background-color: var(--color-action);
+        color: white;
+        border: none;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+      }
+
+      .auth-links {
+        margin-top: var(--space-md);
+        text-align: center;
+        font-size: 0.9rem;
+      }
     </style>
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <% if user_signed_in?%>
+    <% if user_signed_in? %>
       <header class="app-header">
         <div class="app-header-left">
-          <% unless controller_name == "dashboard" && action_name == "index"%>
+          <% unless controller_name == "dashboard" && action_name == "index" %>
             <%= link_to "Dashboard", dashboard_path, class: "header-link" %>
-          <% end%>
+          <% end  %>
         </div>
         <div class="app-header-right">
           <span class="user-greeting">
@@ -215,6 +281,11 @@
           class: "logout-button" %>
         </div>
       </header>
+    <% end %>
+    <% if !user_signed_in? && controller_path.start_with?("devise/") %>
+      <div class="auth-back">
+        <%= link_to "← Volver al inicio", root_path, class: "auth-back-link" %>
+      </div>
     <% end %>
     <main>
       <%= yield %>
