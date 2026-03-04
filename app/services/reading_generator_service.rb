@@ -9,7 +9,7 @@ class ReadingGeneratorService
   end
 
   def call
-    # check_valid_message_length
+    #  check_valid_message_length
     response = adapter.message_to_chat_api(request_messages)
     create_reading(response)
   end
@@ -35,13 +35,37 @@ class ReadingGeneratorService
         "messages" : [mensaje_de_la_primera_carta,mensaje_de_la_segunda_carta,mensaje_de_la_tercer_carta]
         "conclusion" : "la conclusión de la lectura"
       }
-      Además, no repitas lecturas.
+      IMPORTANTE : no repitas lecturas.
+      IMPORTANTE : los nombres permitidos a utilizarse para las cartas deben ser alguno de estos [
+  "El Loco",
+  "El Mago",
+  "La Emperatriz",
+  "La Fuerza",
+  "La Muerte",
+  "El Diablo",
+  "La Luna",
+  "El Sol",
+  "La Torre",
+  "El Juicio",
+  "El Ermitaño",
+  "La Rueda de la Fortuna",
+  "La Sacerdotisa",
+  "El Carro",
+  "La Estrella",
+  "La Justicia",
+  "El Colgado",
+  "La Templanza",
+  "El Emperador",
+  "El Papa",
+  "El Mundo"
+]
+
     CONTENT
   end
 
   def system_prompt
     <<~CONTENT
-      Sos un tarotista profesional que responde con una lectura breve de 3 cartas.
+      Sos un tarotista profesional que responde con una lectura breve de 3 cartas,solo usando arcanos mayores.
     CONTENT
   end
 
@@ -54,13 +78,14 @@ class ReadingGeneratorService
   end
 
   def create_reading(response)
-    parsed_response = response.is_a?(String) ? JSON.parse(response) : response
-    content_parsed = CodeSnippetParser.parse_snippet((parsed_response.dig("choices", 0, "message", "content")))
-    json_parsed = JSON.parse(content_parsed)
+    parsed_response = JSON.parse(response)
+    reading_content = parsed_response.dig("choices", 0, "message", "content")
+    cleaned_reading = LlmOutputNormalizer.parse_output(reading_content)
+    reading_data = JSON.parse(cleaned_reading)
 
     cards = []
-    card_names = json_parsed["cards"]
-    card_messages = json_parsed["messages"]
+    card_names = reading_data["cards"]
+    card_messages = reading_data["messages"]
     cards_with_messages_names = card_names.zip(card_messages)
 
     cards_with_messages_names.each_with_index do
@@ -70,7 +95,7 @@ class ReadingGeneratorService
       card.save!
     end
 
-    reading = Reading.new(name: json_parsed["name"], conclusion: json_parsed["conclusion"], user: user)
+    reading = Reading.new(name: reading_data["name"], conclusion: reading_data["conclusion"], user: user)
     reading.save!
     cards.each_with_index do
       |card, index_card|
