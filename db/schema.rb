@@ -10,16 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_11_04_202343) do
+ActiveRecord::Schema[7.2].define(version: 2026_11_04_203852) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cards", force: :cascade do |t|
     t.string "name"
-    t.string "image_path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "message"
     t.index ["name"], name: "index_cards_on_name", unique: true
   end
 
@@ -30,6 +28,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_11_04_202343) do
     t.boolean "reversed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "message"
     t.index ["card_id"], name: "index_reading_cards_on_card_id"
     t.index ["reading_id", "card_id"], name: "index_on_reading_id_and_card_id", unique: true
     t.index ["reading_id", "position"], name: "index_reading_cards_on_reading_and_position", unique: true

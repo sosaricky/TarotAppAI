@@ -16,7 +16,6 @@ class ReadingGeneratorService
   def create_reading(reading_data)
     card_names = reading_data["cards"]
     card_messages = reading_data["messages"]
-    cards_with_messages = card_names.zip(card_messages)
 
     reading = nil
     ActiveRecord::Base.transaction do
@@ -26,16 +25,14 @@ class ReadingGeneratorService
         user: user
       )
 
-      cards_with_messages.each_with_index do |(name, message), index|
-        card = Card.find_or_create_by!(name: name) do |new_card|
-          new_card.message = message
-          new_card.image_path = ImagePathGeneratorService.get_path_of_card(name)
-        end
+      card_names.zip(card_messages).each_with_index do |(name, message), index|
+        card = Card.find_or_create_by!(name: name)
 
         reading.reading_cards.create!(
           card: card,
           position: index,
-          reversed: [ false, true ].sample
+          reversed: [ false, true ].sample,
+          message: message
         )
       end
     end

@@ -11,6 +11,23 @@ RSpec.describe "Readings", type: :request do
     allow(ReadingGeneratorService).to receive(:new).and_return(service)
   end
 
+  describe "GET /readings/:id" do
+    let(:reading) { create(:reading, user: user) }
+    let(:card) { create(:card) }
+
+    before do
+      create(:reading_card, reading: reading, card: card, position: 0, message: "A message")
+    end
+
+    it "renders the card image, its text, and the conclusion" do
+      get reading_path(reading)
+
+      expect(response.body).to include('/images/cards/The Fool.jpg')
+      expect(response.body).to include("A message")
+      expect(response.body).to include(reading.conclusion)
+    end
+  end
+
   describe "POST /readings" do
     context "when the reading is generated successfully" do
       let(:reading) { create(:reading) }

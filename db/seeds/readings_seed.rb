@@ -39,7 +39,8 @@ READINGS_COUNT.times do
       reading: reading,
       card: card,
       position: index,
-      reversed: [ false, true ].sample
+      reversed: [ false, true ].sample,
+      message: "Sample message for #{card.name}."
     )
   end
 end

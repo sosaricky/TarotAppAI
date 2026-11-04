@@ -10,13 +10,6 @@ RSpec.describe ReadingGeneratorService do
     double("Adapters::DeepSeekAdapter", message_to_chat_api: api_response.to_json)
   end
 
-  # Keep the test deterministic and decoupled from the filesystem/locale:
-  # image path resolution is the responsibility of ImagePathGeneratorService,
-  # not of ReadingGeneratorService.
-  before do
-    allow(ImagePathGeneratorService).to receive(:get_path_of_card).and_return("images/cards/the_fool.jpg")
-  end
-
   let(:api_response) do
     {
       choices: [
@@ -44,6 +37,13 @@ RSpec.describe ReadingGeneratorService do
     expect(reading.cards.count).to eq(3)
     expect(reading.cards.map(&:name))
       .to contain_exactly("El Loco", "El Mago", "La Estrella")
+  end
+
+  it "stores each card's message on the reading card" do
+    service.call
+
+    messages = Reading.last.reading_cards.order(:position).pluck(:message)
+    expect(messages).to eq([ "message one", "message two", "message three" ])
   end
 
   it "reuses existing cards instead of duplicating them across readings" do

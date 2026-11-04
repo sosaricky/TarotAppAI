@@ -27,4 +27,10 @@ class Card < ApplicationRecord
 
   has_many :reading_cards, dependent: :destroy
   has_many :readings, through: :reading_cards
+
+  # The image path is derived from the card name instead of being stored,
+  # so it can never go stale or contain a hardcoded filesystem path.
+  def image_path
+    ImagePathGeneratorService.get_path_of_card(name)
+  end
 end
