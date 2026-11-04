@@ -7,6 +7,15 @@ RSpec.describe "Anonymous readings", type: :request do
     allow(ReadingGeneratorService).to receive(:new).and_return(service)
   end
 
+  describe "GET / (home)" do
+    it "renders a form that posts to the anonymous readings endpoint" do
+      get root_path
+
+      expect(response.body).to include('action="/readings/anonymous"')
+      expect(response.body).to include('method="post"')
+    end
+  end
+
   describe "POST /readings/anonymous" do
     it "creates a reading and redirects to it without requiring sign in" do
       reading = create(:reading, user: nil)
