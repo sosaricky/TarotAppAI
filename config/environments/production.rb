@@ -16,8 +16,9 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Ensure a master key is available in ENV["RAILS_MASTER_KEY"], config/master.key,
-  # or an environment-specific credentials file.
-  config.require_master_key = true
+  # or an environment-specific credentials file. Asset precompilation sets
+  # SECRET_KEY_BASE_DUMMY, which lets the build run without the real key.
+  config.require_master_key = ENV["SECRET_KEY_BASE_DUMMY"].blank?
 
   # Enable serving static files from the /public folder when the ENV variable is present.
   # Required for platforms like Render.
