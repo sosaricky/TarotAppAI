@@ -13,6 +13,11 @@ class ReadingsController < ApplicationController
   end
 
   def create
+    if current_user.reached_daily_reading_limit?
+      redirect_to dashboard_path, alert: "Alcanzaste tu límite diario de tiradas."
+      return
+    end
+
     new_reading = generate_reading(current_user)
     redirect_to reading_path(new_reading)
   rescue ReadingResponseParser::InvalidResponseError, Adapters::DeepSeekAdapter::ApiError => e

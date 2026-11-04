@@ -51,6 +51,20 @@ RSpec.describe "Readings", type: :request do
       end
     end
 
+    context "when the daily limit is reached" do
+      before do
+        allow(User).to receive(:daily_reading_limit).and_return(2)
+        create_list(:reading, 2, user: user)
+      end
+
+      it "redirects with an alert instead of generating" do
+        post readings_path
+
+        expect(response).to redirect_to(dashboard_path)
+        expect(flash[:alert]).to be_present
+      end
+    end
+
     context "when the LLM response is invalid" do
       before do
         allow(service).to receive(:call)

@@ -3,4 +3,6 @@ class Reading < ApplicationRecord
   belongs_to :user, optional: true
   has_many :reading_cards, dependent: :destroy
   has_many :cards, through: :reading_cards
+
+  scope :created_today, -> { where("created_at >= ?", Time.current.beginning_of_day) }
 end

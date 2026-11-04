@@ -39,5 +39,8 @@ module TarotAppAi
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.i18n.default_locale = :en
+
+    # Global daily reading limit per user, configurable via environment.
+    config.x.daily_reading_limit = ENV.fetch("DAILY_READING_LIMIT", "3").to_i
   end
 end
