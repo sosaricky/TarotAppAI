@@ -1,12 +1,17 @@
-<h1>Readings</h1>
+<h1>Lecturas</h1>
 <h3><%= @reading.name %></h3>
-<ul>
-    <% @reading.reading_cards.order(:position).each do |reading_card|%>
-    <li>
+
+<ul class="reading-cards">
+  <% @reading.reading_cards.order(:position).each do |reading_card| %>
+    <li class="reading-card">
       <%= image_tag(reading_card.card.image_path, alt: reading_card.card.name) %>
-      <h4><%= reading_card.card.name %></h4>
-      <p><%= reading_card.message %></p>
+      <div class="card-name"><%= reading_card.card.name %></div>
+      <p class="card-message"><%= reading_card.message %></p>
     </li>
-    <% end %>
+  <% end %>
 </ul>
-<p><%= @reading.conclusion %></p>
+
+<div class="reading-conclusion">
+  <h4>Conclusión</h4>
+  <p><%= @reading.conclusion %></p>
+</div>
