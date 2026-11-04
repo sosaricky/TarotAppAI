@@ -18,6 +18,16 @@ Rack::Attack.throttle(
   req.ip if req.path == "/readings/anonymous" && req.post?
 end
 
+# Throttle account registrations by IP to prevent flooding the database.
+# Adjust SIGN_UP_LIMIT to change how many sign-ups a single IP can perform.
+Rack::Attack.throttle(
+  "registrations/ip",
+  limit: ENV.fetch("SIGN_UP_LIMIT", "3").to_i,
+  period: 1.hour
+) do |req|
+  req.ip if req.path == "/users" && req.post?
+end
+
 # A themed page shown when a request is throttled, matching the site's look.
 THROTTLED_RESPONSE_HTML = <<~HTML
   <!DOCTYPE html>

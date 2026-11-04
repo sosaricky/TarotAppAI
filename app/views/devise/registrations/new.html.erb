@@ -4,6 +4,10 @@
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
+      <div class="honeypot" aria-hidden="true">
+        <input type="text" name="user[website]" tabindex="-1" autocomplete="off">
+      </div>
+
       <div class="auth-field">
         <%= f.label :email %>
         <%= f.email_field :email, autofocus: true %>
