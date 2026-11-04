@@ -65,8 +65,9 @@ Rails.application.configure do
   # Set log level. "info" is typical for production.
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  # Use a shared Redis cache store so Rack::Attack throttling counters are
+  # consistent across multiple processes/instances.
+  config.cache_store = :redis_cache_store, { url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/0" } }
 
   # Use a real queuing backend for Active Job.
   # config.active_job.queue_adapter = :resque

@@ -66,4 +66,8 @@ RSpec.configure do |config|
   # Load FactoryBot syntax methods (build, create, attributes_for, etc.)
   # into the example groups so factories can be used directly.
   config.include FactoryBot::Syntax::Methods
+
+  # Reset Rack::Attack throttling counters between examples so rate-limit
+  # state does not leak across specs.
+  config.before(:each) { Rack::Attack.reset! }
 end

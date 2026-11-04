@@ -22,8 +22,11 @@ gem "sassc-rails"
 gem "httparty"
 gem "bootstrap", "~> 5.3"
 
-# Use Redis adapter to run Action Cable in production
-# gem "redis", ">= 4.0.1"
+# Rate limiting / throttling
+gem "rack-attack"
+
+# Use Redis as the shared cache store for Rack::Attack in production
+gem "redis", ">= 4.0.1"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
