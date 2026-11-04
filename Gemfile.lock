@@ -83,8 +83,6 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.6)
       msgpack (~> 1.2)
-    bootstrap (5.3.5)
-      popper_js (>= 2.11.8, < 3)
     brakeman (8.1.0)
       racc
     builder (3.3.0)
@@ -122,7 +120,6 @@ GEM
       railties (>= 6.1.0)
     faker (3.5.2)
       i18n (>= 1.8.11, < 2)
-    ffi (1.17.2-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
     htmlbeautifier (1.4.3)
@@ -194,7 +191,6 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.7.0-x86_64-linux)
-    popper_js (2.11.8)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -324,14 +320,6 @@ GEM
       prism (>= 1.2, < 2.0)
       rbs (>= 3, < 5)
     ruby-progressbar (1.13.0)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     securerandom (0.4.1)
     sexp_processor (4.17.3)
     solargraph (0.58.3)
@@ -403,7 +391,6 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
-  bootstrap (~> 5.3)
   brakeman
   debug
   devise
@@ -424,7 +411,6 @@ DEPENDENCIES
   rspec-rails (~> 6.1)
   rubocop-rails-omakase
   ruby-lsp
-  sassc-rails
   solargraph
   sprockets-rails
   stimulus-rails

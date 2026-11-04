@@ -18,9 +18,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
-gem "sassc-rails"
 gem "httparty"
-gem "bootstrap", "~> 5.3"
 
 # Rate limiting / throttling
 gem "rack-attack"
