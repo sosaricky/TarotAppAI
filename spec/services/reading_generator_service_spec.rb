@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ReadingGeneratorService do
-  subject(:service) { described_class.new(user.id, adapter) }
+  subject(:service) { described_class.new(user, adapter) }
 
   let(:user) { create(:user) }
 
@@ -52,5 +52,15 @@ RSpec.describe ReadingGeneratorService do
     expect { service.call }
       .to change(Reading, :count).by(1)
       .and change(Card, :count).by(0)
+  end
+
+  context "with an anonymous user" do
+    subject(:service) { described_class.new(nil, adapter) }
+
+    it "creates a reading without a user" do
+      service.call
+
+      expect(Reading.last.user).to be_nil
+    end
   end
 end

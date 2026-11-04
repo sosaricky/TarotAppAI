@@ -9,7 +9,9 @@ devise_for :users
     root to: "home#index"
   end
 
-  resources :readings, only: [:index, :show, :create]
+  resources :readings, only: [:index, :show, :create] do
+    post :anonymous, on: :collection
+  end
 
   get "/dashboard", to: "dashboard#index"
 

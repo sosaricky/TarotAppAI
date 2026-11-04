@@ -26,6 +26,14 @@ RSpec.describe "Readings", type: :request do
       expect(response.body).to include("A message")
       expect(response.body).to include(reading.conclusion)
     end
+
+    it "redirects when the reading belongs to another user" do
+      other_reading = create(:reading)
+
+      get reading_path(other_reading)
+
+      expect(response).to redirect_to(root_path)
+    end
   end
 
   describe "POST /readings" do
@@ -49,10 +57,10 @@ RSpec.describe "Readings", type: :request do
           .and_raise(ReadingResponseParser::InvalidResponseError, "Unknown card names: Carta Inventada")
       end
 
-      it "redirects to the dashboard with an alert instead of raising a 500" do
+      it "redirects to the root with an alert instead of raising a 500" do
         post readings_path
 
-        expect(response).to redirect_to(dashboard_path)
+        expect(response).to redirect_to(root_path)
         expect(flash[:alert]).to be_present
       end
     end
@@ -63,10 +71,10 @@ RSpec.describe "Readings", type: :request do
           .and_raise(Adapters::DeepSeekAdapter::ApiError, "DeepSeek API request failed")
       end
 
-      it "redirects to the dashboard with an alert instead of raising a 500" do
+      it "redirects to the root with an alert instead of raising a 500" do
         post readings_path
 
-        expect(response).to redirect_to(dashboard_path)
+        expect(response).to redirect_to(root_path)
         expect(flash[:alert]).to be_present
       end
     end

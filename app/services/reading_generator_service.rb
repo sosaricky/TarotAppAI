@@ -1,8 +1,8 @@
 class ReadingGeneratorService
   attr_reader :user, :adapter
 
-  def initialize(user_id, adapter)
-    @user = User.find(user_id)
+  def initialize(user, adapter)
+    @user = user
     @adapter = adapter
   end
 

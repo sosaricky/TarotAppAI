@@ -2,7 +2,7 @@
   <h1 class="home-title">Tarot</h1>
 
   <div class="home-actions">
-    <%= link_to "Tirada anónima", "#", class: "home-card" %>
+    <%= link_to "Tirada anónima", anonymous_readings_path, data: { turbo_method: :post }, class: "home-card" %>
 
     <%= link_to "Iniciar sesión", new_user_session_path, class: "home-card" %>
 
