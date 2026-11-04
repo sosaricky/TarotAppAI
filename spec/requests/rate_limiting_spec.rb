@@ -22,7 +22,10 @@ RSpec.describe "Rate limiting", type: :request do
       post anonymous_readings_path
 
       expect(response).to have_http_status(:too_many_requests)
-      expect(response.body).to include("Demasiadas solicitudes")
+      expect(response.media_type).to eq("text/html")
+      expect(response.body).to include("La calma es tan importante")
+      expect(response.body).to include("Intentá más tarde")
+      expect(response.body).to include("Volver al inicio")
     end
   end
 end
