@@ -21,7 +21,10 @@ Bundler.require(*Rails.groups)
 module TarotAppAi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.2
+    config.load_defaults 8.1
+
+    # Active Storage is loaded, but this app does not generate image variants.
+    config.active_storage.variant_processor = :disabled
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
