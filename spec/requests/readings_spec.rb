@@ -25,5 +25,19 @@ RSpec.describe "Readings", type: :request do
         expect(flash[:alert]).to be_present
       end
     end
+
+    context "when the DeepSeek API request fails" do
+      before do
+        allow(service).to receive(:call)
+          .and_raise(Adapters::DeepSeekAdapter::ApiError, "DeepSeek API request failed")
+      end
+
+      it "redirects to the dashboard with an alert instead of raising a 500" do
+        post readings_path
+
+        expect(response).to redirect_to(dashboard_path)
+        expect(flash[:alert]).to be_present
+      end
+    end
   end
 end
