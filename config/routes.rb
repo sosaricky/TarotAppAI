@@ -9,7 +9,7 @@ devise_for :users, controllers: { registrations: "users/registrations", password
     root to: "home#index"
   end
 
-  resources :readings, only: [:index, :show, :create] do
+  resources :readings, only: [ :index, :show, :create ] do
     post :anonymous, on: :collection
   end
 
