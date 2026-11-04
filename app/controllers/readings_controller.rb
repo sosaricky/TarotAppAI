@@ -13,5 +13,8 @@ class ReadingsController < ApplicationController
     adapter = Adapters::DeepSeekAdapter.new
     new_reading = ReadingGeneratorService.new(current_user.id, adapter).call
     redirect_to readings_path(reading_id: new_reading.id)
+  rescue ReadingResponseParser::InvalidResponseError => e
+    Rails.logger.error("Reading generation failed: #{e.message}")
+    redirect_to dashboard_path, alert: "No se pudo generar tu lectura. Intentá de nuevo."
   end
 end
