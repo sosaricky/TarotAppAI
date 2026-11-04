@@ -16,7 +16,9 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
+          # Use the latest 3.4.x built for the runner image. The exact patch
+          # in .ruby-version may not be available on newer images.
+          ruby-version: "3.4"
           bundler-cache: true
 
       - name: Scan for common Rails security vulnerabilities using static analysis
@@ -32,7 +34,9 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
+          # Use the latest 3.4.x built for the runner image. The exact patch
+          # in .ruby-version may not be available on newer images.
+          ruby-version: "3.4"
           bundler-cache: true
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
@@ -47,7 +51,9 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
+          # Use the latest 3.4.x built for the runner image. The exact patch
+          # in .ruby-version may not be available on newer images.
+          ruby-version: "3.4"
           bundler-cache: true
 
       - name: Lint code for consistent style
