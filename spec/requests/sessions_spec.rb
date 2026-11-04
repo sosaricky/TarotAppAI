@@ -12,6 +12,18 @@ RSpec.describe "Sessions", type: :request do
       expect(response).to have_http_status(:redirect)
       expect(flash[:notice]).to be_nil
     end
+
+    it "throttles login attempts from the same IP" do
+      limit = ENV.fetch("LOGIN_LIMIT", "10").to_i
+
+      limit.times do
+        post user_session_path, params: { user: { email: user.email, password: "wrong-password" } }
+      end
+
+      post user_session_path, params: { user: { email: user.email, password: "wrong-password" } }
+
+      expect(response).to have_http_status(:too_many_requests)
+    end
   end
 
   describe "DELETE /users/sign_out" do

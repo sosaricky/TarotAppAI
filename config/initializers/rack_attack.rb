@@ -28,6 +28,15 @@ Rack::Attack.throttle(
   req.ip if req.path == "/users" && req.post?
 end
 
+# Throttle sign-in attempts by IP to slow down brute-force attacks.
+Rack::Attack.throttle(
+  "logins/ip",
+  limit: ENV.fetch("LOGIN_LIMIT", "10").to_i,
+  period: 1.minute
+) do |req|
+  req.ip if req.path == "/users/sign_in" && req.post?
+end
+
 # A themed page shown when a request is throttled, matching the site's look.
 THROTTLED_RESPONSE_HTML = <<~HTML
   <!DOCTYPE html>
