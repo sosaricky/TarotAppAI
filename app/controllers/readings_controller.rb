@@ -1,7 +1,5 @@
-require_relative "../services/adapters/deep_seek_adapter"
-require_relative "../services/reading_generator_service"
 class ReadingsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create, :show, :index ]
+  before_action :authenticate_user!, only: [ :create, :show, :index ]
 
   def index
     @readings = current_user.readings.all

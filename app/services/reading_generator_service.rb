@@ -1,5 +1,3 @@
-require_relative "adapters/deep_seek_adapter"
-
 class ReadingGeneratorService
   attr_reader :user, :adapter
 
