@@ -45,4 +45,12 @@ RSpec.describe ReadingGeneratorService do
     expect(reading.cards.map(&:name))
       .to contain_exactly("The Fool", "The Magician", "The Star")
   end
+
+  it "reuses existing cards instead of duplicating them across readings" do
+    expect { service.call }.to change(Card, :count).by(3)
+
+    expect { service.call }
+      .to change(Reading, :count).by(1)
+      .and change(Card, :count).by(0)
+  end
 end

@@ -83,30 +83,32 @@ class ReadingGeneratorService
     cleaned_reading = LlmOutputNormalizer.parse_output(reading_content)
     reading_data = JSON.parse(cleaned_reading)
 
-    cards = []
     card_names = reading_data["cards"]
     card_messages = reading_data["messages"]
-    cards_with_messages_names = card_names.zip(card_messages)
+    cards_with_messages = card_names.zip(card_messages)
 
-    cards_with_messages_names.each_with_index do
-      |(name, message), index|
-      card = Card.new(name: name, message: message, image_path: ImagePathGeneratorService.get_path_of_card(name))
-      cards << card
-      card.save!
-    end
-
-    reading = Reading.new(name: reading_data["name"], conclusion: reading_data["conclusion"], user: user)
-    reading.save!
-    cards.each_with_index do
-      |card, index_card|
-      reading_card = ReadingCard.new(
-        reading_id: reading.id,
-        card_id: card.id,
-        position: index_card,
-        reversed: [ false, true ].sample
+    reading = nil
+    ActiveRecord::Base.transaction do
+      reading = Reading.create!(
+        name: reading_data["name"],
+        conclusion: reading_data["conclusion"],
+        user: user
       )
-      reading_card.save!
+
+      cards_with_messages.each_with_index do |(name, message), index|
+        card = Card.find_or_create_by!(name: name) do |new_card|
+          new_card.message = message
+          new_card.image_path = ImagePathGeneratorService.get_path_of_card(name)
+        end
+
+        reading.reading_cards.create!(
+          card: card,
+          position: index,
+          reversed: [ false, true ].sample
+        )
+      end
     end
+
     reading
   end
 end
