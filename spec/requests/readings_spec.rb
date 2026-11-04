@@ -12,6 +12,20 @@ RSpec.describe "Readings", type: :request do
   end
 
   describe "POST /readings" do
+    context "when the reading is generated successfully" do
+      let(:reading) { create(:reading) }
+
+      before do
+        allow(service).to receive(:call).and_return(reading)
+      end
+
+      it "redirects to the newly created reading" do
+        post readings_path
+
+        expect(response).to redirect_to(reading_path(reading))
+      end
+    end
+
     context "when the LLM response is invalid" do
       before do
         allow(service).to receive(:call)
