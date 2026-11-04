@@ -1,3 +1,7 @@
+<% unless user_signed_in? %>
+  <%= link_to "← Volver al inicio", root_path, class: "back-home" %>
+<% end %>
+
 <h1>Lecturas</h1>
 <h3><%= @reading.name %></h3>
 

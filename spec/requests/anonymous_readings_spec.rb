@@ -35,6 +35,7 @@ RSpec.describe "Anonymous readings", type: :request do
       get reading_path(reading)
 
       expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Volver al inicio")
     end
   end
 end
