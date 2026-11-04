@@ -36,6 +36,20 @@ RSpec.describe "Registrations", type: :request do
       expect(response).to redirect_to(new_user_session_path)
     end
 
+    it "shows validation errors when sign-up fails" do
+      create(:user, email: "taken@example.com")
+
+      post user_registration_path, params: {
+        user: {
+          email: "taken@example.com",
+          password: "password123",
+          password_confirmation: "password123"
+        }
+      }
+
+      expect(response.body).to include("auth-errors")
+    end
+
     it "throttles sign-ups beyond the limit from the same IP" do
       limit = ENV.fetch("SIGN_UP_LIMIT", "3").to_i
 

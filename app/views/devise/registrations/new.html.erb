@@ -3,6 +3,7 @@
     <h1 class="auth-title">Registrarse</h1>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="honeypot" aria-hidden="true">
         <input type="text" name="user[website]" tabindex="-1" autocomplete="off">
@@ -10,12 +11,12 @@
 
       <div class="auth-field">
         <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
 
       <div class="auth-field">
         <%= f.label :password %>
-        <%= f.password_field :password %>
+        <%= f.password_field :password, autocomplete: "new-password" %>
         <small class="text-muted">
           (<%= @minimum_password_length %> caracteres mínimo)
         </small>
@@ -23,7 +24,7 @@
 
       <div class="auth-field">
         <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
       </div>
 
       <div class="auth-actions">
