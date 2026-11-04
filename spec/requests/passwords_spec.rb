@@ -23,4 +23,21 @@ RSpec.describe "Passwords", type: :request do
       expect(response.body).to include("Nueva contraseña")
     end
   end
+
+  describe "PUT /users/password with an invalid password" do
+    it "shows the styled error messages" do
+      user = create(:user)
+      token = user.send(:set_reset_password_token)
+
+      put user_password_path, params: {
+        user: {
+          reset_password_token: token,
+          password: "short",
+          password_confirmation: "short"
+        }
+      }
+
+      expect(response.body).to include("auth-errors")
+    end
+  end
 end
