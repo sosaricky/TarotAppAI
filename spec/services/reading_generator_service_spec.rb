@@ -24,7 +24,7 @@ RSpec.describe ReadingGeneratorService do
           message: {
             content: {
               name: "Path of Love",
-              cards: [ "The Fool", "The Magician", "The Star" ],
+              cards: [ "El Loco", "El Mago", "La Estrella" ],
               messages: [ "message one", "message two", "message three" ],
               conclusion: "A conclusion"
             }.to_json
@@ -43,7 +43,7 @@ RSpec.describe ReadingGeneratorService do
     expect(reading.user).to eq(user)
     expect(reading.cards.count).to eq(3)
     expect(reading.cards.map(&:name))
-      .to contain_exactly("The Fool", "The Magician", "The Star")
+      .to contain_exactly("El Loco", "El Mago", "La Estrella")
   end
 
   it "reuses existing cards instead of duplicating them across readings" do

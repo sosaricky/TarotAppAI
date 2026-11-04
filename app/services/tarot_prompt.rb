@@ -1,29 +1,5 @@
 # Builds the messages sent to the LLM to request a tarot reading.
 class TarotPrompt
-  ALLOWED_CARD_NAMES = [
-    "El Loco",
-    "El Mago",
-    "La Emperatriz",
-    "La Fuerza",
-    "La Muerte",
-    "El Diablo",
-    "La Luna",
-    "El Sol",
-    "La Torre",
-    "El Juicio",
-    "El Ermitaño",
-    "La Rueda de la Fortuna",
-    "La Sacerdotisa",
-    "El Carro",
-    "La Estrella",
-    "La Justicia",
-    "El Colgado",
-    "La Templanza",
-    "El Emperador",
-    "El Papa",
-    "El Mundo"
-  ].freeze
-
   def request_messages
     [ system_message, user_message ]
   end
@@ -56,7 +32,7 @@ class TarotPrompt
       }
       IMPORTANTE : no repitas lecturas.
       IMPORTANTE : los nombres permitidos a utilizarse para las cartas deben ser alguno de estos [
-    #{ALLOWED_CARD_NAMES.map { |name| "\"#{name}\"" }.join(",\n") }
+    #{Card::MAJOR_ARCANA_NAMES.map { |name| "\"#{name}\"" }.join(",\n") }
     ]
 
     CONTENT

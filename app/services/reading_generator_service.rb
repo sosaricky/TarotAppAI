@@ -7,18 +7,13 @@ class ReadingGeneratorService
   end
 
   def call
-    response = adapter.message_to_chat_api(TarotPrompt.new.request_messages)
-    create_reading(response)
+    raw_response = adapter.message_to_chat_api(TarotPrompt.new.request_messages)
+    create_reading(ReadingResponseParser.call(raw_response))
   end
 
   private
 
-  def create_reading(response)
-    parsed_response = JSON.parse(response)
-    reading_content = parsed_response.dig("choices", 0, "message", "content")
-    cleaned_reading = LlmOutputNormalizer.parse_output(reading_content)
-    reading_data = JSON.parse(cleaned_reading)
-
+  def create_reading(reading_data)
     card_names = reading_data["cards"]
     card_messages = reading_data["messages"]
     cards_with_messages = card_names.zip(card_messages)
