@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-devise_for :users, controllers: { registrations: "users/registrations" }
+devise_for :users, controllers: { registrations: "users/registrations", passwords: "users/passwords" }
 
   authenticated :user do
     root to: "dashboard#index", as: :authenticated_root
