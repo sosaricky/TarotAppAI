@@ -10,5 +10,4 @@
 require 'faker'
 require_relative 'seeds/cards_seed.rb'
 require_relative 'seeds/users_seed.rb'
-require_relative 'seeds/reading_cards_seed.rb'
 require_relative 'seeds/readings_seed.rb'
